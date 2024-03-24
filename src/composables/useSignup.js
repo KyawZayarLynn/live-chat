@@ -12,13 +12,8 @@ let createAccount = async(email,password,displayName) => {
     updateProfile(auth.currentUser,{displayName})
     return res;
   } catch (err) {
-    const errorMessageMapping = {
-      "auth/email-already-in-use": "Email already exists",
-      };
-    const errorCode = err.code;
-    const friendlyErrorMessage = errorMessageMapping[errorCode];
-
-    error.value = friendlyErrorMessage;
+    const errorMessage = err.message.replace(/^Firebase:\s*/, '');
+    error.value = errorMessage;
   }
 }
 
