@@ -11,7 +11,7 @@
 <script>
 import { ref } from 'vue'
 import { auth } from "../../src/firebase/config"
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword,updateProfile } from 'firebase/auth';
 
 export default {
   setup() {
@@ -25,16 +25,16 @@ export default {
         if (!res) {
           throw new Error("couldn't create a new user");
         }
+        updateProfile(auth.currentUser,{displayName:displayName.value})
         console.log(res.user)
       } catch (err) {
         const errorMessageMapping = {
-      "auth/email-already-in-use": "Email already exists",
-      };
+          "auth/email-already-in-use": "Email already exists",
+          };
         const errorCode = err.code;
         const friendlyErrorMessage = errorMessageMapping[errorCode];
 
         error.value = friendlyErrorMessage;
-        console.log(error.value);
       }
     }
 
