@@ -11,6 +11,8 @@
 <script>
 import { ref } from 'vue';
 import getUser from "../../src/composables/getUser"
+import { auth } from '@/firebase/config';
+import { signOut } from 'firebase/auth';
 export default {
   setup()
   {
