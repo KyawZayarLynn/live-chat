@@ -10,7 +10,7 @@ let signIn = async(email,password) => {
     if (!res) {
       throw new Error("Login Failed!")
     }
-    console.log(res.user)
+    return res;
   } catch (err) {
     const errorMessage = err.message.replace(/^Firebase:\s*/, '');
     error.value = errorMessage;
@@ -21,4 +21,4 @@ let useLogin = () => {
   return {error,signIn}
 }
 
-export default useLogin;
+export {useLogin};
