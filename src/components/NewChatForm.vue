@@ -8,18 +8,20 @@
 import { ref } from 'vue'
 import getUser from '@/composables/getUser';
 import { Timestamp } from "firebase/firestore";
+import useCollection from "../../src/composables/useCollection"
 
 export default {
   setup() {
     let message = ref("");
     let { user } = getUser();
-    let handleSubmit = () => {
+    let { error, addDoc } = useCollection("messages");
+    let handleSubmit = async() => {
       let chat = {
         message: message.value,
         name: user.value.displayName,
         created_at:Timestamp.now()
       }
-      console.log(chat);
+      await addDoc(chat);
       message.value = "";
     }
     return {message,handleSubmit}
