@@ -1,5 +1,5 @@
 <template>
-  <h2>Login</h2>
+  <h2>Login to ZEP's chat room</h2>
     <form @submit.prevent="login">
       <input type="email" placeholder="email" v-model="email">
       <input type="password" placeholder="password" v-model="password">
